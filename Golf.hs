@@ -3,14 +3,14 @@ module Golf where
 import Data.List
 
 
-every :: [a] -> Int -> [a]
-every n xs = case drop (n - 1) xs of
-             (y:ys) -> y : every n ys
-             [] -> []
-
-skips :: [a] -> [[a]]
+skips :: [t] -> [[t]]
 skips [] = []
-skips x@(_:_) = map (every x) [0..length (x - 1)]
+skips x@(_:_) = map (every x) [1..length x]
+
+every ::[t] -> Int -> [t]
+every xs n = case drop (n - 1) xs of
+             (y:ys) -> y : every ys n
+             [] -> []
 
 
 localMaxima :: [Integer] -> [Integer]
